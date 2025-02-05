@@ -9,6 +9,7 @@ class BikesController < ApplicationController
     end
     def create
       @bike = Bike.create(
+        user_id: current_user.id,
         brand: params[:brand],
         model: params[:model],
         image_url: params[:image_url]
@@ -25,5 +26,7 @@ class BikesController < ApplicationController
       render :show
     end
     def delete
+      bike = Bike.find_by(id: params[:id])
+      bike.destroy
     end
 end
